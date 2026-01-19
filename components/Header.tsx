@@ -1,6 +1,6 @@
 import LogoutButton from "./header/LogOutButton";
 import Link from "next/link";
-import { APPS } from "@/lib/app";
+import { APPS } from "@/lib/apps";
 
 type HeaderProps = {
     email: string;

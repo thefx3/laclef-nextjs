@@ -29,7 +29,7 @@ export default function LoginForm() {
       return;
     }
 
-    router.replace("/?login=success");
+    router.replace("/");
     router.refresh();
   }
 
