@@ -1,7 +1,6 @@
-import { createClient } from "@/lib/supabase/server";
 import type { Post, PostType } from "./types";
 
-type PostRow = {
+export type PostRow = {
   id: string;
   content: string;
   type: PostType;
@@ -11,9 +10,10 @@ type PostRow = {
   author_email: string | null;
   created_at: string;
   updated_at: string;
+  author_id?: string | null;
 };
 
-function splitContent(content: string) {
+export function splitContent(content: string) {
   const parts = content.split("\n\n");
   const title = (parts[0] ?? "").trim();
   const description =
@@ -21,7 +21,15 @@ function splitContent(content: string) {
   return { title, description };
 }
 
-function rowToPost(row: PostRow): Post {
+export function composeContent(title: string, description?: string) {
+  const t = title.trim();
+  const d = description?.trim();
+  return d ? `${t}\n\n${d}` : t;
+}
+
+export function rowToPost(row: PostRow): Post {
+  const { title, description } = splitContent(row.content);
+
   return {
     id: row.id,
     content: row.content,
@@ -33,15 +41,4 @@ function rowToPost(row: PostRow): Post {
     created_at: new Date(row.created_at),
     updated_at: new Date(row.updated_at),
   };
-}
-
-export async function fetchPostsServer(): Promise<Post[]> {
-  const supabase = await createClient();
-  const { data, error } = await supabase
-    .from("posts")
-    .select("*")
-    .order("created_at", { ascending: false });
-
-  if (error) throw error;
-  return ((data ?? []) as PostRow[]).map(rowToPost);
 }
