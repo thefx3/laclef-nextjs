@@ -28,7 +28,7 @@ export async function PATCH(
 
   const supabase = await createClient();
 
-  const { error } = await supabase
+  const { data, error } = await supabase
     .from("posts")
     .update({
       content,
@@ -37,13 +37,15 @@ export async function PATCH(
       end_at,
       updated_at: new Date().toISOString(),
     })
-    .eq("id", id);
+    .eq("id", id)
+    .select()
+    .single();
 
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 400 });
   }
 
-  return NextResponse.json({ ok: true });
+  return NextResponse.json({ post: data });
 }
 
 export async function DELETE(

@@ -14,7 +14,7 @@ export default function Modal({ children, onClose,}: { children: ReactNode; onCl
       >
         {children}
         <button
-          className="absolute top-2 right-2 text-gray-400 hover:text-gray-600 cursor-pointer"
+          className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 cursor-pointer"
           onClick={onClose}
           aria-label="Fermer la fenêtre"
         >

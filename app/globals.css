@@ -98,23 +98,40 @@ body {
     font-size: 0.75rem;
     line-height: 1rem;
     font-weight: 600;
-    text-decoration: underline;
+    text-decoration: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+    border-radius: 0.5rem;
+    border: 1px solid transparent;
+    padding: 0.4rem 0.6rem;
+    transition: background-color 150ms ease, color 150ms ease, border-color 150ms ease;
   }
 
   .btn-action--edit {
-    color: var(--accent);
+    color: var(--accent-hover);
+    background-color: color-mix(in srgb, var(--accent) 18%, var(--surface));
+    border-color: color-mix(in srgb, var(--accent) 40%, var(--border));
   }
 
   .btn-action--edit:hover {
     color: var(--accent-hover);
+    background-color: color-mix(in srgb, var(--accent) 28%, var(--surface));
+    border-color: color-mix(in srgb, var(--accent) 60%, var(--border));
   }
 
   .btn-action--delete {
-    color: var(--danger);
+    color: var(--danger-hover);
+    background-color: color-mix(in srgb, var(--danger) 16%, var(--surface));
+    border-color: color-mix(in srgb, var(--danger) 40%, var(--border));
   }
 
   .btn-action--delete:hover {
     color: var(--danger-hover);
+    background-color: color-mix(in srgb, var(--danger) 26%, var(--surface));
+    border-color: color-mix(in srgb, var(--danger) 60%, var(--border));
   }
 
   .btn-action--disabled:disabled {
