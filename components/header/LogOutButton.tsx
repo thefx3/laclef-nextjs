@@ -15,7 +15,7 @@ export default function LogoutButton() {
     return (
         <button
           onClick={handleLogout}
-          className="px-4 py-2 rounded-md bg-black text-white text-sm font-semibold hover:bg-gray-800 cursor-pointer"
+          className="btn-primary"
         >
           Déconnexion
         </button>

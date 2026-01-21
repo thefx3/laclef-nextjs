@@ -24,21 +24,29 @@ export default function NavBar() {
   const links = APP_NAV[appKey];
 
   const navLinkClass =
-    "font-bold text-white hover:text-black text-md tracking-widest px-8 py-4 transition-colors hover:bg-[linear-gradient(100deg,_white,_grey)]";
+    "group inline-flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold tracking-wide text-slate-700 transition hover:bg-slate-900/5 hover:text-slate-900";
 
   const navLinkActiveClass =
-    "bg-[linear-gradient(100deg,_#000000_20%,_grey_60%,_#cccccc_100%)]";
+    "bg-slate-900 text-white shadow-sm hover:bg-slate-900 hover:text-black";
 
   return (
-    <aside className="hidden bg-black text-white shadow-sm w-full lg:block lg:w-64 shrink-0">
+    <aside className="hidden w-full shrink-0 border-r border-white/80 bg-white/70 shadow-sm backdrop-blur lg:block lg:w-64">
       <Link
         href="/"
-        className="font-bold tracking-[0.25em] text-2xl uppercase py-5 px-8 mb-3 inline-block"
+        className="mb-4 inline-flex items-center gap-3 px-6 pt-6 text-lg font-semibold uppercase tracking-[0.25em] text-slate-900"
       >
-        <Image src={icon} alt="La CLEF Logo" width={96} height={96} className="mx-auto mt-2 h-24 w-24 logo-white" priority />
+        <Image
+          src={icon}
+          alt="La CLEF Logo"
+          width={56}
+          height={56}
+          className="h-14 w-14 rounded-2xl border border-white/80 bg-white/80 p-2 shadow-sm"
+          priority
+        />
+        <span>La CLEF</span>
       </Link>
 
-      <nav className="flex flex-col gap-4">
+      <nav className="flex flex-col gap-2 px-4 pb-6">
         {links.map((link) => {
           const isBaseRoute = links.some(
             (other) => other.href !== link.href && other.href.startsWith(`${link.href}/`)
@@ -52,7 +60,7 @@ export default function NavBar() {
             <Link
               key={link.href}
               href={link.href}
-              className={`${navLinkClass} ${isActive ? navLinkActiveClass : ""} inline-flex items-center gap-2`}
+              className={`${navLinkClass} ${isActive ? navLinkActiveClass : ""}`}
               aria-current={isActive ? "page" : undefined}
             >
               <Icon className="h-4 w-4" aria-hidden />

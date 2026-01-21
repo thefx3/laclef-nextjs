@@ -12,13 +12,20 @@ import {
     Blocks, 
     Files, 
     Users,
-    LucideIcon } from "lucide-react";
+    LucideIcon, 
+    FolderKanban,
+    Aperture,
+    CalendarCheck,
+    Landmark} from "lucide-react";
 
 export const APPS = [
-  { key: "accueil", href: "/accueil", label: "Accueil", Icon: Headset, colorClass: "text-green-500" },
+  { key: "accueil", href: "/accueil", label: "Accueil", Icon: CalendarCheck, colorClass: "text-green-500" },
   { key: "flce", href: "/flce", label: "FLCE", Icon: Croissant, colorClass: "text-yellow-500" },
-  { key: "activites", href: "/activites", label: "Activités", Icon: PersonStanding, colorClass: "text-violet-500" },
+  { key: "activites", href: "/activites", label: "Activités", Icon: PersonStanding, colorClass: "text-pink-500" },
   { key: "musique", href: "/musique", label: "Musique", Icon: Music, colorClass: "text-blue-500" },
+  { key: "production", href: "/production", label: "Production", Icon: FolderKanban, colorClass: "text-orange-500" },
+  { key: "actions_culturelles", href: "/actions_culturelles", label: "Actions Culturelles", Icon: Aperture, colorClass: "text-violet-500" },
+  { key: "comptabilite", href: "/comptabilite", label: "Comptabilité", Icon: Landmark, colorClass: "text-red-500" },
 ] as const;
 
 export type AppRole = "ACCUEIL" | "FLCE" | "MUSIQUE" | "ACTIVITES" | "ADMIN" | "SUPER_ADMIN";
@@ -55,5 +62,20 @@ export const APP_NAV: Record<AppKey, NavLink[]> = {
 
     { href: "/flce/users", label: "Utilisateurs", Icon: Users }
   ],
+
+    production: [
+    { href: "/production", label: "Home", Icon: Home },
+    { href: "/production/users", label: "Utilisateurs", Icon: Users }
+  ],
+
+    actions_culturelles: [
+    { href: "/actions_culturelles", label: "Home", Icon: Home },
+    { href: "/actions_culturelles/users", label: "Utilisateurs", Icon: Users }
+    ],
+
+    comptabilite: [
+    { href: "/comptabilite", label: "Home", Icon: Home },
+    { href: "/comptabilite/users", label: "Utilisateurs", Icon: Users }
+  ]
 
 } as const;

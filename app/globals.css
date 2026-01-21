@@ -68,8 +68,7 @@ body {
     font-size: 0.875rem;
     line-height: 1.25rem;
     cursor: pointer;
-    transition: color 150ms ease, background-color 150ms ease, border-color 150ms ease,
-      box-shadow 150ms ease;
+    transition: color 150ms ease, background-color 150ms ease, border-color 150ms ease, box-shadow 150ms ease;
   }
 
   .btn-filter:focus-visible {

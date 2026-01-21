@@ -15,7 +15,7 @@ export async function LauncherHeader() {
       </div>
 
       <form action={logoutAction}>
-        <button className="rounded-md bg-black px-4 py-2 text-sm font-semibold text-white hover:bg-gray-800">
+        <button className="btn-primary">
           Déconnexion
         </button>
       </form>
