@@ -177,7 +177,22 @@ export default function CalendarView({ posts }: { posts: Post[] }) {
 
   return (
     <section className="w-full" suppressHydrationWarning>
+      {/* TABS FILTERS */}
+      <div className="mb-4 w-fit rounded-md bg-[var(--grey)] p-1 inset-shadow-md">
+        {MODES.map((m) => (
+          <button
+            key={m.key}
+            className={`btn-tab ${
+              mode === m.key ? "btn-tab--active shadow-sm" : "btn-tab--inactive"
+            }`}
+            onClick={() => setModeAndReset(m.key)}
+          >
+            {m.label}
+          </button>
+        ))}
+      </div>
       <div className="p-4 shadow-sm backdrop-blur sm:p-6">
+
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div className="flex items-center gap-2">
             <button onClick={goPrev} className={arrowBase} aria-label="Période précédente">
@@ -191,21 +206,6 @@ export default function CalendarView({ posts }: { posts: Post[] }) {
             </button>
 
           </div>
-          <div className="text-sm font-semibold text-slate-800">{modeLabel}</div>
-        </div>
-
-        <div className="mt-4 flex flex-wrap gap-2">
-          {MODES.map((m) => (
-            <button
-              key={m.key}
-              className={`btn-filter ${
-                mode === m.key ? "btn-filter--active" : "btn-filter--inactive"
-              }`}
-              onClick={() => setModeAndReset(m.key)}
-            >
-              {m.label}
-            </button>
-          ))}
         </div>
 
         <div
