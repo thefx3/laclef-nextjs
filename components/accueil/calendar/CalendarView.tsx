@@ -184,6 +184,10 @@ export default function CalendarView({ posts }: { posts: Post[] }) {
   const isDayMode = mode === "day";
   const isMonthMode = mode === "month";
   const monthStart = isMonthMode ? startOfMonth(cursor) : null;
+  const weekdayLabels = useMemo(() => {
+    if (!isMonthMode) return [];
+    return ["Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim"];
+  }, [isMonthMode]);
 
   const arrowBase =
     "h-10 w-10 pb-2 flex items-center justify-center shrink-0 rounded-lg text-4xl leading-none hover:scale-95 transition-colors cursor-pointer";
@@ -250,11 +254,11 @@ export default function CalendarView({ posts }: { posts: Post[] }) {
 
         <div className="mt-6">
           {isMonthMode ? (
-            <div className="border mt-5 grid grid-cols-7 rounded-md border-slate-200/30 text-sm font-semibold uppercase text-slate-800">
-              {["Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim"].map((label) => (
+            <div className="grid grid-cols-7 border border-slate-200/80 bg-white/90 text-sm font-semibold uppercase text-slate-800">
+              {weekdayLabels.map((label, index) => (
                 <div
-                  key={label}
-                  className="border-r border-t bg-slate-200/30 border-slate-200/80 px-3 py-2"
+                  key={`${label}-${index}`}
+                  className="border-r border-slate-200/80 bg-slate-100/70 px-3 py-2 calendar-weekday"
                 >
                   {label}
                 </div>
@@ -262,9 +266,7 @@ export default function CalendarView({ posts }: { posts: Post[] }) {
             </div>
           ) : null}
 
-          <div
-            className={`grid rounded-md ${gridCols}`}
-          >
+          <div className={`grid border border-slate-200/80 bg-white/90 ${gridCols}`}>
             {days.map((day) => {
               const isOutsideMonth =
                 isMonthMode &&
@@ -278,12 +280,16 @@ export default function CalendarView({ posts }: { posts: Post[] }) {
               return (
                 <div
                   key={day.toISOString()}
-                  className={`min-w-0 border-t border-l border-slate-200/80 p-3 sm:p-4 ${
-                    isSameDay(day, today) ? "bg-emerald-50/70" : ""
+                  className={`min-w-0 border-l border-slate-200/80 flex flex-col border-b ${
+                    isSameDay(day, today) ? "bg-emerald-100/70" : ""
                   }`}
                 >
                   <div
-                    className="flex items-center justify-between gap-2 text-xs font-semibold text-slate-700 cursor-pointer"
+                    className={`flex items-start text-[11px] font-semibold text-slate-700 cursor-pointer ${
+                      isMonthMode
+                        ? "border-slate-200/50 px-2 py-1 bg-transparent"
+                        : "border-b border-slate-200 bg-slate-100/70 px-4 py-2"
+                    }`}
                     onClick={() => {
                       setMode("day");
                       setCursor(startOfDay(day));
@@ -292,27 +298,24 @@ export default function CalendarView({ posts }: { posts: Post[] }) {
                   >
                     {isMonthMode ? (
                       <span
-                        className={`rounded-full border px-2 py-0.5 text-[11px] ${
+                        className={`rounded-full border px-2 py-0.5 text-[11px] mt-1 ${
                           isOutsideMonth
                             ? "border-slate-200 text-slate-400"
                             : "border-slate-200 bg-white text-slate-700"
                         }`}
                       >
-                        {day.getDate()}
+                        {day.getDate()} 
                       </span>
                     ) : (
                       <>
-                        <span className="truncate">{formatLabelByMode(day)}</span>
-                        <span className="rounded-full border border-slate-200 bg-white px-2 py-0.5 text-[11px] text-slate-600">
-                          {day.getDate()}
-                        </span>
+                        <span className="text-[1rem]">{formatLabelByMode(day)}</span>
                       </>
                     )}
                   </div>
 
-                  <div className="mt-2 text-sm text-[var(--muted)]">
+                  <div className="mt-1 text-sm text-[var(--muted)]">
                     {dayPosts.length === 0 ? (
-                      <div className="text-[var(--muted-subtle)]">Aucune publication</div>
+                      <div className="text-xs text-[var(--muted-subtle)] px-4 pb-2">Aucune publication</div>
                     ) : (
                       <PostList
                         posts={postsToShow}
