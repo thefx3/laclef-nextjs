@@ -57,7 +57,7 @@ export default function PostModal({
             Créé le :{" "}
             {post.created_at.toLocaleString("fr-FR", {
               dateStyle: "short",
-              // timeStyle: "short",
+              timeStyle: "short",
             })}
           </div>
           <div>

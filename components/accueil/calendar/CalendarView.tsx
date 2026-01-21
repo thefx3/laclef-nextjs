@@ -354,7 +354,7 @@ export default function CalendarView({ posts }: { posts: Post[] }) {
                         remaining={isDayMode ? 0 : remaining}
                         onSelectPost={setSelectedPost}
                         onShowMore={() => setExpandedDay(day)}
-                        showMeta={isSameDay(day, today)}
+                        showMeta
                       />
                     )}
                   </div>

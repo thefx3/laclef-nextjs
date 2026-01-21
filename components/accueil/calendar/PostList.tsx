@@ -45,9 +45,9 @@ export default function PostList({
           </div>
           {showMeta ? (
             <div className="text-[10px] text-[var(--muted-subtle)]">
-              {p.created_at.toLocaleTimeString("fr-FR", {
-                hour: "2-digit",
-                minute: "2-digit",
+              {p.created_at.toLocaleString("fr-FR", {
+                dateStyle: "short",
+                timeStyle: "short",
               })}{" "}
               · {p.authorName}
             </div>
