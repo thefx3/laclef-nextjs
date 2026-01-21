@@ -210,11 +210,11 @@ export default function CalendarView({ posts }: { posts: Post[] }) {
       </div>
 
 
-      <div className="rounded-lg border-slate-50 shadow-xl">
+      <div className="rounded-xl shadow-[0_8px_30px_-12px_rgba(15,23,42,0.35)]">
         
         {/* FILTER HEADER */}
-        <div className="m-6 flex flex-wrap items-center justify-between">
-          <div className="flex items-center gap-3">
+        <div className="rounded-xl m-6 flex flex-wrap items-center justify-between">
+          <div className="flex items-center gap-3 mt-6">
             <div className="flex h-12 w-12 flex-col items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-700 shadow-sm">
               <span className="text-[10px] font-semibold uppercase">
                 {today.toLocaleDateString("fr-FR", { month: "short" })}
@@ -252,7 +252,7 @@ export default function CalendarView({ posts }: { posts: Post[] }) {
           </button>
         </div>
 
-        <div className="mt-6">
+        <div className="mt-6 rounded-b-xl overflow-hidden">
           {isMonthMode ? (
             <div className="grid grid-cols-7 border border-slate-200/80 bg-white/90 text-sm font-semibold uppercase text-slate-800">
               {weekdayLabels.map((label, index) => (
