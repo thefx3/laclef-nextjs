@@ -39,6 +39,15 @@ export const POST_TYPE_LABELS: Record<PostType, string> = {
   RETARD: "Retard",
 };
 
+export const POST_TYPE_COLORS: Record<PostType, string> = {
+  A_LA_UNE: "#f59e0b",
+  ABSENCE: "#fb7185",
+  EVENT: "#34d399",
+  INFO: "#38bdf8",
+  REMPLACEMENT: "#818cf8",
+  RETARD: "#fb923c",
+};
+
 const POST_TYPE_STYLES: Record<
   PostType,
   { bar: string; badge: string; border: string }
