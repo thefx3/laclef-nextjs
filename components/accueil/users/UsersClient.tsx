@@ -144,8 +144,9 @@ export default function UsersClient({
         lastName: nextLast,
       });
 
-      if (result?.user_profile) {
-        setUsers((prev) => [result.user_profile, ...prev]);
+      const createdProfile = result.user_profile;
+      if (createdProfile) {
+        setUsers((prev) => [createdProfile, ...prev]);
       }
 
       resetCreateForm();
@@ -235,7 +236,7 @@ export default function UsersClient({
   return (
     <div className="space-y-6">
       {error && (
-        <div className="rounded-lg border border-rose-200 bg-rose-50 px-3 py-2 text-sm text-rose-700">
+        <div className="rounded-lg border border-rose-200 bg-rose-50 px-3 py-2 text-sm font-bold text-rose-700">
           {error}
         </div>
       )}
@@ -314,18 +315,9 @@ export default function UsersClient({
 
       {/* TABLE */}
       <section className={cardBase}>
-      {/* HEADER */}
-        <div className="flex flex-wrap items-center justify-between gap-2 p-4 border-b border-slate-100 px-5 py-4">
-          <div>
-            <h2 className="text-sm font-semibold text-slate-900">Comptes</h2>
-          </div>
-          <div className="text-xs font-semibold text-slate-500">
-            {users.length} compte{users.length > 1 ? "s" : ""}
-          </div>
-        </div>
 
         <div className="w-full overflow-x-auto">
-          <table className="min-w-[900px] w-full text-left text-sm">
+          <table className="min-w-[900px] w-full text-sm">
             <colgroup>
               <col className="w-[32%]" />
               <col className="w-[14%]" />
@@ -335,7 +327,7 @@ export default function UsersClient({
             </colgroup>
             <thead className="bg-slate-50 text-left text-slate-700">
               <tr>
-                <th className="px-4 py-3 text-left">Email</th>
+                <th className="px-4 py-3 text-left justify-items-start">Email</th>
                 <th className="px-4 py-3 text-left">Prénom</th>
                 <th className="px-4 py-3 text-left">Nom</th>
                 <th className="px-4 py-3 text-left">Rôle</th>
@@ -405,7 +397,7 @@ export default function UsersClient({
 
       {/* EDIT MODAL */}
       {editing && (
-        <div className="fixed inset-0 z-50 grid place-items-center bg-black/40 p-4">
+        <div className="fixed inset-0 z-50 grid place-items-center backdrop-blur bg-black/40 p-4">
           <div className="w-full max-w-2xl rounded-2xl border border-slate-200 bg-white p-5 shadow-2xl">
             <div className="flex flex-wrap items-start justify-between gap-2">
               <div>

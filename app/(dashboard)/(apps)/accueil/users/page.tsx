@@ -28,7 +28,7 @@ export default async function UsersPage() {
 
   return (
     <PageShell>
-      <PageHeader title="Utilisateurs" />
+      <PageHeader title="Utilisateurs"/>
       <UsersClient
         initialUsers={(data ?? []) as UserProfileRow[]}
         currentRole={currentRole}
