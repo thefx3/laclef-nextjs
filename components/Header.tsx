@@ -13,7 +13,7 @@ export default function Header({ email, role }: HeaderProps) {
     "h-9 w-9 rounded-lg border border-white/70 bg-white/70 p-2 text-slate-700 shadow-sm  transition hover:-translate-y-0.5 hover:bg-white hover:text-slate-900";
 
     return (
-        <header className="w-full flex justify-between p-4 shadow-sm bg-white">
+        <header className="w-full flex items-center justify-between p-4 shadow-sm bg-white">
         {/* Gauche */}
         <div className="flex items-center">
           <MobileNav />
@@ -34,7 +34,7 @@ export default function Header({ email, role }: HeaderProps) {
   
         {/* Droite */}
         <div className="mt-3 flex flex-wrap items-center gap-3 text-sm text-slate-700 sm:mt-0">
-            <div className="text-sm">
+            <div className="text-sm hidden md:block">
                 <span className="font-medium text-slate-900">{email ?? "—"}</span>
                 <span className="ml-2 rounded-full border border-white/80 bg-white/70 px-2 py-0.5 text-xs text-slate-600">
                   {role}
