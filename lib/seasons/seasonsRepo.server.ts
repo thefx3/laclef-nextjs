@@ -2,15 +2,9 @@ import "server-only";
 
 import { cache } from "react";
 import { createClient } from "@/lib/supabase/server";
+import type { SeasonRow } from "@/lib/seasons/types";
 
-export type SeasonRow = {
-  id: string;
-  code: string;
-  start_date: string;
-  end_date: string;
-  is_current: boolean;
-  created_at: string;
-};
+export type { SeasonRow } from "@/lib/seasons/types";
 
 export const fetchSeasonsServer = cache(async (): Promise<SeasonRow[]> => {
   const supabase = await createClient();

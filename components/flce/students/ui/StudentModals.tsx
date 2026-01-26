@@ -2,7 +2,7 @@
 
 import Modal from "@/components/ui/Modal";
 import type { EditFormState, StudentRow } from "@/lib/students/types";
-import type { SeasonRow } from "@/lib/seasons/seasonsRepo.server";
+import type { SeasonRow } from "@/lib/seasons/types";
 import { deriveRecordKind } from "@/lib/students/utils";
 
 const fieldBase =

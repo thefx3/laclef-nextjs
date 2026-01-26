@@ -1,7 +1,8 @@
 import "server-only";
 
 import { cookies } from "next/headers";
-import { fetchSeasonsServer, type SeasonRow } from "./seasonsRepo.server";
+import { fetchSeasonsServer } from "./seasonsRepo.server";
+import type { SeasonRow } from "./types";
 
 const COOKIE_NAME = "flce_season_id";
 

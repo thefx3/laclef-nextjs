@@ -1,9 +1,9 @@
 "use client";
 
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { supabase } from "@/lib/supabase/browser";
 import type { EditFormState, SortKey, SortState, StudentRow, Tab } from "@/lib/students/types";
-import type { SeasonRow } from "@/lib/seasons/seasonsRepo.server";
+import type { SeasonRow } from "@/lib/seasons/types";
 import {
   buildEditForm,
   deriveRecordKind,
@@ -67,6 +67,17 @@ export default function StudentsClient({
   const [createErrors, setCreateErrors] = useState<string[]>([]);
 
   const [deleteCandidate, setDeleteCandidate] = useState<StudentRow | null>(null);
+
+  useEffect(() => {
+    setStudents(initialStudents);
+    setTab("ENROLLED");
+    setSortState(null);
+    setFilters(DEFAULT_FILTERS);
+    setError(null);
+    setEditingStudent(null);
+    setCreateOpen(false);
+    setDeleteCandidate(null);
+  }, [initialStudents, selectedSeasonId]);
 
   // Tabs counts
   const counts = useMemo(() => {
