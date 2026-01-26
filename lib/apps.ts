@@ -26,7 +26,8 @@ export const APPS = [
   { key: "comptabilite", href: "/comptabilite", label: "Comptabilité", Icon: Landmark, colorClass: "text-red-500" },
 ] as const;
 
-export type AppRole = "ACCUEIL" | "FLCE" | "MUSIQUE" | "ACTIVITES" | "ADMIN" | "SUPER_ADMIN";
+export const APP_KEYS = APPS.map((app) => app.key);
+
 export type AppKey = (typeof APPS)[number]["key"];
 export type AppItem = (typeof APPS)[number];
 

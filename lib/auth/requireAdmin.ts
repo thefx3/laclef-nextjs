@@ -1,4 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
+import type { UserRole } from "@/lib/users/types";
 
 export async function requireAdmin() {
   const supabase = await createClient();
@@ -20,10 +21,11 @@ export async function requireAdmin() {
     return { ok: false as const, status: 403, error: "Profile not found" };
   }
 
-  const isAdmin = profile.role === "ADMIN" || profile.role === "SUPER_ADMIN";
+  const role = (profile.role ?? "USER") as UserRole;
+  const isAdmin = role === "ADMIN" || role === "SUPER_ADMIN";
   if (!isAdmin) {
     return { ok: false as const, status: 403, error: "Forbidden" };
   }
 
-  return { ok: true as const, user, role: profile.role };
+  return { ok: true as const, user, role };
 }

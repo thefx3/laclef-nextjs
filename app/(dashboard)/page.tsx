@@ -5,7 +5,9 @@ import { logoutAction } from "@/components/header/LogOutAction";
 
 export async function LauncherHeader() {
   const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
   if (!user) return null;
 
   return (
@@ -23,7 +25,9 @@ export async function LauncherHeader() {
   );
 }
 
-export default function Launcher() {
+export default async function Launcher() {
+  const apps = APPS;
+
   return (
     <div className="dashboard-shell relative overflow-hidden px-6 py-10 font-sans space-y-8">
       
@@ -41,7 +45,7 @@ export default function Launcher() {
         </div>
 
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {APPS.map(({ href, label, Icon, colorClass }, index) => (
+          {apps.map(({ href, label, Icon, colorClass }, index) => (
             <Link
               key={href}
               href={href}
