@@ -52,7 +52,7 @@ function StudentFormFields({
     <div className="space-y-3">
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
         <label className={labelBase}>
-          Genre
+          Civilité
           <select
             className={fieldBase}
             value={form.gender}
@@ -61,8 +61,8 @@ function StudentFormFields({
             }
           >
             <option value="">—</option>
-            <option value="M">M</option>
-            <option value="F">F</option>
+            <option value="M">Mr</option>
+            <option value="F">Mrs</option>
             <option value="X">X</option>
           </select>
         </label>

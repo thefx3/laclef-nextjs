@@ -35,8 +35,6 @@ function StudentsTableBase({
     if (!sortState || sortState.key !== key) return "";
     return sortState.direction === "asc" ? "↑" : "↓";
   };
-  const enrolledBadge =
-    "inline-flex items-center rounded-full bg-emerald-50 px-3 py-1.5 text-[12px] font-semibold text-emerald-700 ring-1 ring-emerald-200";
 
   return (
     <div className="rounded-xl border bg-white overflow-x-auto">
@@ -98,7 +96,7 @@ function StudentsTableBase({
                 <td className="px-4 py-3">{formatYesNo(student.paid_total)}</td>
                 <td className="px-4 py-3">
                   {student.record_kind === "ENROLLED" ? (
-                    <span className={enrolledBadge}>Inscrit</span>
+                    <span className="badge badge--green">Inscrit</span>
                   ) : student.record_kind === "PRE_REGISTERED" ? (
                     "En cours"
                   ) : student.record_kind === "LEFT" ? (
