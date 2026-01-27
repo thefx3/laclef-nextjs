@@ -36,7 +36,7 @@ export default function StatsCharts({ data }: { data: StatsDashboardData }) {
         <div className={cardBase}>
           <p className={cardTitle}>Répartition des statuts</p>
           <div className={`mt-4 ${chartWrapBase}`}>
-            <ResponsiveContainer width="100%" height="100%" minHeight={220} minWidth={0} initialDimension={ { width: 320, height: 220 } } initialDimension={ { width: 320, height: 220 } }>
+            <ResponsiveContainer width="100%" height="100%" minHeight={220} minWidth={0}>
               <BarChart data={data.statusData}>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="name" />
@@ -53,9 +53,9 @@ export default function StatsCharts({ data }: { data: StatsDashboardData }) {
         </div>
 
         <div className={cardBase}>
-          <p className={cardTitle}>Civilité</p>
+          <p className={cardTitle}>Genre</p>
           <div className={chartWrapBase}>
-            <ResponsiveContainer width="100%" height="100%" minHeight={220} minWidth={0} initialDimension={ { width: 320, height: 220 } }>
+            <ResponsiveContainer width="100%" height="100%" minHeight={220} minWidth={0}>
               <PieChart>
                 <Pie data={data.genderData} 
                 dataKey="value"
@@ -77,7 +77,7 @@ export default function StatsCharts({ data }: { data: StatsDashboardData }) {
         <div className={cardBase}>
           <p className={cardTitle}>Au pair</p>
           <div className={chartWrapBase}>
-            <ResponsiveContainer width="100%" height="100%" minHeight={220} minWidth={0} initialDimension={ { width: 320, height: 220 } }>
+            <ResponsiveContainer width="100%" height="100%" minHeight={220} minWidth={0}>
               <PieChart>
                 <Pie
                   data={data.auPairData}
@@ -102,7 +102,7 @@ export default function StatsCharts({ data }: { data: StatsDashboardData }) {
         <div className={cardBase}>
           <p className={cardTitle}>Inscriptions avec pré-inscription</p>
           <div className={chartWrapBase}>
-            <ResponsiveContainer width="100%" height="100%" minHeight={220} minWidth={0} initialDimension={ { width: 320, height: 220 } }>
+            <ResponsiveContainer width="100%" height="100%" minHeight={220} minWidth={0}>
               <PieChart>
                 <Pie
                   data={data.enrolledPreRegData}
@@ -124,14 +124,14 @@ export default function StatsCharts({ data }: { data: StatsDashboardData }) {
         </div>
       </section>
 
-      <section className="grid gap-3 lg:grid-cols-[1fr_1fr]">
+      <section className="grid gap-3 lg:grid-cols-[1fr_1fr_1fr]">
         <div className={cardBase}>
           <div className="flex items-center justify-between">
             <p className={cardTitle}>Lieux de naissance</p>
             <p className={cardSubtitle}>Top lieux</p>
           </div>
           <div className={`mt-4 ${chartWrapBase}`}>
-            <ResponsiveContainer width="100%" height="100%" minHeight={220} minWidth={0} initialDimension={ { width: 320, height: 220 } }>
+            <ResponsiveContainer width="100%" height="100%" minHeight={220} minWidth={0}>
               <BarChart data={data.birthPlaceData} layout="vertical" margin={{ left: -50 }}>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis type="number" allowDecimals={false} />
@@ -146,7 +146,7 @@ export default function StatsCharts({ data }: { data: StatsDashboardData }) {
         <div className={cardBase}>
           <p className={cardTitle}>Âges</p>
           <div className={`mt-4 ${chartWrapBase}`}>
-            <ResponsiveContainer width="100%" height="100%" minHeight={220} minWidth={0} initialDimension={ { width: 320, height: 220 } }>
+            <ResponsiveContainer width="100%" height="100%" minHeight={220} minWidth={0}>
               <BarChart data={data.ageBuckets}>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="label" />
@@ -157,13 +157,32 @@ export default function StatsCharts({ data }: { data: StatsDashboardData }) {
             </ResponsiveContainer>
           </div>
         </div>
+
+        <div className={cardBase}>
+          <p className={cardTitle}>Âges × Genre</p>
+          <div className={`mt-4 ${chartWrapBase}`}>
+            <ResponsiveContainer width="100%" height="100%" minHeight={220} minWidth={0}>
+              <BarChart data={data.ageGenderData}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="label" />
+                <YAxis allowDecimals={false} />
+                <Tooltip contentStyle={tooltipStyle} />
+                <Legend />
+                <Bar dataKey="M" stackId="gender" fill="#F59E0B" name="Mr" />
+                <Bar dataKey="F" stackId="gender" fill="#38BDF8" name="Mrs" />
+                <Bar dataKey="X" stackId="gender" fill="#A78BFA" name="X" />
+                <Bar dataKey="ND" stackId="gender" fill="#CBD5F5" name="ND" />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
       </section>
 
       <section className="grid gap-3 lg:grid-cols-[1.2fr_0.8fr]">
         <div className={cardBase}>
           <p className={cardTitle}>Arrivées par mois</p>
           <div className={`mt-4 ${chartWrapBase}`}>
-            <ResponsiveContainer width="100%" height="100%" minHeight={220} minWidth={0} initialDimension={ { width: 320, height: 220 } }>
+            <ResponsiveContainer width="100%" height="100%" minHeight={220} minWidth={0}>
               <LineChart data={data.arrivals}>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="month" />
@@ -181,7 +200,7 @@ export default function StatsCharts({ data }: { data: StatsDashboardData }) {
             <p className={cardSubtitle}>Top classes</p>
           </div>
           <div className={`mt-4 ${chartWrapBase}`}>
-            <ResponsiveContainer width="100%" height="100%" minHeight={220} minWidth={0} initialDimension={ { width: 320, height: 220 } }>
+            <ResponsiveContainer width="100%" height="100%" minHeight={220} minWidth={0}>
               <BarChart data={data.classData} layout="vertical" margin={{ left: 20 }}>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis type="number" allowDecimals={false} />

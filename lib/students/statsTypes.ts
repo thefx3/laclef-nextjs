@@ -9,6 +9,14 @@ export type StatLabelDatum = {
   value: number;
 };
 
+export type AgeGenderDatum = {
+  label: string;
+  M: number;
+  F: number;
+  X: number;
+  ND: number;
+};
+
 export type StatsTotals = {
   total: number;
   enrolled: number;
@@ -28,5 +36,6 @@ export type StatsDashboardData = {
   classData: StatLabelDatum[];
   birthPlaceData: StatLabelDatum[];
   ageBuckets: StatLabelDatum[];
+  ageGenderData: AgeGenderDatum[];
   arrivals: { month: string; value: number }[];
 };

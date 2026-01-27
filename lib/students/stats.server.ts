@@ -2,7 +2,7 @@ import "server-only";
 
 import { createClient } from "@/lib/supabase/server";
 import { getAge } from "@/lib/students/utils";
-import type { StatColorDatum, StatsDashboardData } from "@/lib/students/statsTypes";
+import type { AgeGenderDatum, StatColorDatum, StatsDashboardData } from "@/lib/students/statsTypes";
 
 export type StudentStatRow = {
   record_kind: "LEAD" | "PRE_REGISTERED" | "ENROLLED" | "LEFT" | null;
@@ -87,6 +87,12 @@ export function buildStudentStats(
     { label: "30-50", value: 0 },
     { label: "50+", value: 0 },
   ];
+  const ageGenderData: AgeGenderDatum[] = [
+    { label: "<20", M: 0, F: 0, X: 0, ND: 0 },
+    { label: "20-30", M: 0, F: 0, X: 0, ND: 0 },
+    { label: "30-50", M: 0, F: 0, X: 0, ND: 0 },
+    { label: "50+", M: 0, F: 0, X: 0, ND: 0 },
+  ];
   const arrivals = Array.from({ length: 12 }, (_, index) => ({
     month: monthLabels[index],
     value: 0,
@@ -126,10 +132,18 @@ export function buildStudentStats(
 
     const age = getAge(row.birth_date);
     if (age !== null) {
-      if (age <= 20) ageBuckets[0].value += 1;
-      else if (age <= 30) ageBuckets[1].value += 1;
-      else if (age <= 50) ageBuckets[2].value += 1;
-      else ageBuckets[3].value += 1;
+      let bucketIndex = 0;
+      if (age <= 20) bucketIndex = 0;
+      else if (age <= 30) bucketIndex = 1;
+      else if (age <= 50) bucketIndex = 2;
+      else bucketIndex = 3;
+
+      ageBuckets[bucketIndex].value += 1;
+
+      if (row.gender === "M") ageGenderData[bucketIndex].M += 1;
+      else if (row.gender === "F") ageGenderData[bucketIndex].F += 1;
+      else if (row.gender === "X") ageGenderData[bucketIndex].X += 1;
+      else ageGenderData[bucketIndex].ND += 1;
     }
 
     if (row.arrival_date) {
@@ -253,6 +267,7 @@ export function buildStudentStats(
     classData: topClasses,
     birthPlaceData: topBirthPlaces,
     ageBuckets,
+    ageGenderData,
     arrivals,
   };
 }
