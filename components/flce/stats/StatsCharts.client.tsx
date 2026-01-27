@@ -178,7 +178,7 @@ export default function StatsCharts({ data }: { data: StatsDashboardData }) {
         </div>
       </section>
 
-      <section className="grid gap-3 lg:grid-cols-[1.2fr_0.8fr]">
+      <section className="grid gap-3 lg:grid-cols-[0.8fr_1.2fr]">
         <div className={cardBase}>
           <p className={cardTitle}>Arrivées par mois</p>
           <div className={`mt-4 ${chartWrapBase}`}>
@@ -201,10 +201,10 @@ export default function StatsCharts({ data }: { data: StatsDashboardData }) {
           </div>
           <div className={`mt-4 ${chartWrapBase}`}>
             <ResponsiveContainer width="100%" height="100%" minHeight={220} minWidth={0}>
-              <BarChart data={data.classData} layout="vertical" margin={{ left: 20 }}>
+              <BarChart data={data.classData}>
                 <CartesianGrid strokeDasharray="3 3" />
-                <XAxis type="number" allowDecimals={false} />
-                <YAxis type="category" dataKey="label" width={100} />
+                <XAxis dataKey="label" />
+                <YAxis allowDecimals={false} />
                 <Tooltip contentStyle={tooltipStyle} />
                 <Bar dataKey="value" fill="#10B981" />
               </BarChart>

@@ -111,7 +111,11 @@ export default function OrganisationReferenceClient({
 
   return (
     <div className="space-y-6">
-      {error ? <p className="text-sm text-rose-600">{error}</p> : null}
+      {error ? (
+        <div className="rounded-lg border border-rose-200 bg-rose-50 px-3 py-2 text-sm text-rose-700">
+          {error}
+        </div>
+      ) : null}
 
       <div className="grid gap-6 md:grid-cols-2">
         {/* TEACHERS */}
@@ -927,26 +931,6 @@ function ClassOfferingModal({
                 >
                   <option value="1">1</option>
                   <option value="2">2</option>
-                </select>
-              </label>
-              <label className={labelBase}>
-                Jour
-                <select
-                  className={fieldBase}
-                  value={form.day_of_week ? String(form.day_of_week) : ""}
-                  onChange={(e) =>
-                    setForm((prev) => ({
-                      ...prev,
-                      day_of_week: e.target.value ? Number(e.target.value) : null,
-                    }))
-                  }
-                >
-                  <option value="">—</option>
-                  {Object.entries(DAY_LABELS).map(([value, label]) => (
-                    <option key={value} value={value}>
-                      {label}
-                    </option>
-                  ))}
                 </select>
               </label>
               <label className={labelBase}>

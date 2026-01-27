@@ -173,12 +173,6 @@ export function buildStudentStats(
     .map(([label, value]) => ({ label, value }))
     .sort((a, b) => b.value - a.value);
 
-  const topClasses = classData.slice(0, 8);
-  if (classData.length > 8) {
-    const rest = classData.slice(8).reduce((sum, item) => sum + item.value, 0);
-    topClasses.push({ label: "Autres", value: rest });
-  }
-
   const birthPlaceData = Array.from(birthPlaceCounts.entries())
     .map(([label, value]) => ({ label, value }))
     .sort((a, b) => b.value - a.value);
@@ -269,7 +263,7 @@ export function buildStudentStats(
     genderData,
     auPairData,
     enrolledPreRegData,
-    classData: topClasses,
+    classData,
     birthPlaceData: topBirthPlaces,
     ageBuckets,
     ageGenderData,
