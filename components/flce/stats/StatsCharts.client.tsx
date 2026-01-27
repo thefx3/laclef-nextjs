@@ -29,6 +29,8 @@ export default function StatsCharts({ data }: { data: StatsDashboardData }) {
     fontSize: 12,
     padding: "8px 10px",
   };
+  const renderPercentLabel = ({ percent }: { percent?: number }) =>
+    `${Math.round((percent ?? 0) * 100)}%`;
 
   return (
     <div className="space-y-8">
@@ -57,12 +59,14 @@ export default function StatsCharts({ data }: { data: StatsDashboardData }) {
           <div className={chartWrapBase}>
             <ResponsiveContainer width="100%" height="100%" minHeight={220} minWidth={0}>
               <PieChart>
-                <Pie data={data.genderData} 
-                dataKey="value"
-                nameKey="name" 
-                outerRadius={60} 
-                label
-                labelLine>
+                <Pie
+                  data={data.genderData}
+                  dataKey="value"
+                  nameKey="name"
+                  outerRadius={60}
+                  label={renderPercentLabel}
+                  labelLine
+                >
                   {data.genderData.map((entry) => (
                     <Cell key={entry.name} fill={entry.color} />
                   ))}
@@ -85,7 +89,7 @@ export default function StatsCharts({ data }: { data: StatsDashboardData }) {
                   nameKey="name"
                   innerRadius={30}
                   outerRadius={60}
-                  label
+                  label={renderPercentLabel}
                   labelLine
                 >
                   {data.auPairData.map((entry) => (
@@ -109,7 +113,7 @@ export default function StatsCharts({ data }: { data: StatsDashboardData }) {
                   dataKey="value"
                   nameKey="name"
                   outerRadius={60}
-                  label
+                  label={renderPercentLabel}
                   labelLine
                 >
                   {data.enrolledPreRegData.map((entry) => (
