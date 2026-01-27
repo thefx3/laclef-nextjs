@@ -42,6 +42,35 @@ const readSeasonForm = (formData: FormData): SeasonInput => {
 
 export async function createSeasonAction(formData: FormData) {
   "use server";
+  await createSeason(formData, "/flce/organisation");
+}
+
+export async function updateSeasonAction(formData: FormData) {
+  "use server";
+  await updateSeason(formData, "/flce/organisation");
+}
+
+export async function deleteSeasonAction(formData: FormData) {
+  "use server";
+  await deleteSeason(formData, "/flce/organisation");
+}
+
+export async function createSeasonSettingsAction(formData: FormData) {
+  "use server";
+  await createSeason(formData, "/settings/seasons");
+}
+
+export async function updateSeasonSettingsAction(formData: FormData) {
+  "use server";
+  await updateSeason(formData, "/settings/seasons");
+}
+
+export async function deleteSeasonSettingsAction(formData: FormData) {
+  "use server";
+  await deleteSeason(formData, "/settings/seasons");
+}
+
+async function createSeason(formData: FormData, redirectTo: string) {
   await requireSeasonAdmin();
   const { code, startDate, endDate, isCurrent } = readSeasonForm(formData);
 
@@ -62,11 +91,10 @@ export async function createSeasonAction(formData: FormData) {
 
   if (error) throw new Error(error.message);
 
-  redirect("/flce/organisation");
+  redirect(redirectTo);
 }
 
-export async function updateSeasonAction(formData: FormData) {
-  "use server";
+async function updateSeason(formData: FormData, redirectTo: string) {
   await requireSeasonAdmin();
   const { id, code, startDate, endDate, isCurrent } = readSeasonForm(formData);
   if (!id) throw new Error("Identifiant manquant.");
@@ -91,11 +119,10 @@ export async function updateSeasonAction(formData: FormData) {
 
   if (error) throw new Error(error.message);
 
-  redirect("/flce/organisation");
+  redirect(redirectTo);
 }
 
-export async function deleteSeasonAction(formData: FormData) {
-  "use server";
+async function deleteSeason(formData: FormData, redirectTo: string) {
   await requireSeasonAdmin();
   const id = String(formData.get("id") ?? "").trim();
   if (!id) throw new Error("Identifiant manquant.");
@@ -103,5 +130,5 @@ export async function deleteSeasonAction(formData: FormData) {
   const { error } = await supabaseAdmin.from("seasons").delete().eq("id", id);
   if (error) throw new Error(error.message);
 
-  redirect("/flce/organisation");
+  redirect(redirectTo);
 }

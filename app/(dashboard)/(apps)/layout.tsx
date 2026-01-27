@@ -8,14 +8,14 @@ export default async function AppsLayout({ children }: { children: React.ReactNo
   if (!user) redirect("/login");
 
   return (
-    <div className="min-h-screen">
-      <div className="flex flex-col lg:flex-row min-h-screen">
-        <NavBar />
-        <main className="relative flex flex-col w-full min-h-screen min-w-0">
+    <div className="h-screen">
+      <div className="flex h-full flex-col lg:flex-row">
+        <NavBar role={role} />
+        <main className="relative flex min-h-0 w-full flex-col min-w-0">
           <div className="mx-auto w-full">
             <Header email={user.email ?? "-"} role={role} />
           </div>
-          <div className="mx-auto w-full flex-1">
+          <div className="mx-auto w-full flex-1 overflow-y-auto">
             {children}
           </div>
         </main>

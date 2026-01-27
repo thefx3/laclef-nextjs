@@ -1,5 +1,6 @@
 import "server-only";
 
+import { redirect } from "next/navigation";
 import { cache } from "react";
 import { createClient } from "@/lib/supabase/server";
 import type { UserRole } from "@/lib/users/types";
@@ -27,3 +28,10 @@ export const getViewerServer = cache(async () => {
 
   return { user, role };
 });
+
+export async function requireAdmin() {
+  const { user, role } = await getViewerServer();
+  if (!user) redirect("/login");
+  if (role !== "ADMIN" && role !== "SUPER_ADMIN") redirect("/"); // ou /accueil
+  return { user, role };
+}
