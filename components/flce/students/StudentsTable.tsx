@@ -51,7 +51,7 @@ function StudentsTableBase({
             </th>
             <th className="px-4 py-3 text-left">Classe S1</th>
             <th className="px-4 py-3 text-left">Classe S2</th>
-            <th className="px-4 py-3 text-left">Note</th>
+            {tab !== "ENROLLED" && <th className="px-4 py-3 text-left">Note</th>}
             <th className="px-4 py-3 text-left">Arrivée</th>
             <th className="px-4 py-3 text-left">Départ</th>
             {tab !== "LEAD" && <th className="px-4 py-3 text-left">Âge</th>}
@@ -85,7 +85,7 @@ function StudentsTableBase({
                 <td className="px-4 py-3">{student.first_name}</td>
                 <td className="px-4 py-3">{student.class_s1_code ?? "—"}</td>
                 <td className="px-4 py-3">{student.class_s2_code ?? "—"}</td>
-                <td className="px-4 py-3">{student.note ?? "—"}</td>
+                {tab !== "ENROLLED" && <td className="px-4 py-3">{student.note ?? "—"}</td>}
                 <td className="px-4 py-3">{formatDate(student.arrival_date)}</td>
                 <td className="px-4 py-3">{formatDate(student.departure_date)}</td>
                 {tab !== "LEAD" && <td className="px-4 py-3">{formatAge(student.birth_date)}</td>}
@@ -100,7 +100,7 @@ function StudentsTableBase({
                   {student.record_kind === "ENROLLED" ? (
                     <span className="badge badge--green">Inscrit</span>
                   ) : student.record_kind === "PRE_REGISTERED" ? (
-                    "En cours"
+                    "Pré-inscrit"
                   ) : student.record_kind === "LEFT" ? (
                     "Sorti"
                   ) : (

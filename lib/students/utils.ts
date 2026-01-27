@@ -105,8 +105,11 @@ export function validateEditForm(form: EditFormState) {
   if (!form.pre_registration && form.paid_150) {
     errors.push("150€ ne peut être Oui si la pré-inscription est Non.");
   }
-  if (form.pre_registration && !form.paid_150) {
-    errors.push("Si pré-inscription = Oui, alors 150€ doit être Oui.");
+  if (form.pre_registration && form.paid_total && !form.paid_150) {
+    errors.push("Si paiement total + pré-inscription, alors 150€ doit être Oui.");
+  }
+  if (form.pre_registration && !form.paid_150 && !form.paid_total) {
+    errors.push("Si pré-inscription = Oui, alors 150€ doit être Oui (sauf si paiement total).");
   }
   return errors;
 }

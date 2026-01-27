@@ -41,22 +41,16 @@ function StudentFormFields({
   const updatePaymentState = (patch: FormPatch) => {
     const next: EditFormState = { ...form, ...patch };
 
-    if (patch.paid_total === true) {
-      next.pre_registration = true;
-      next.paid_150 = true;
-    }
-
     if (patch.paid_150 === true) {
       next.pre_registration = true;
     }
 
     if (patch.pre_registration === false) {
       next.paid_150 = false;
-      next.paid_total = false;
     }
 
-    if (patch.paid_150 === false) {
-      next.paid_total = false;
+    if (next.pre_registration && next.paid_total) {
+      next.paid_150 = true;
     }
 
     onChange(next);
@@ -328,7 +322,7 @@ function StudentFormFields({
           {deriveRecordKind(form.pre_registration, form.paid_total) === "ENROLLED"
             ? "Inscrit"
             : deriveRecordKind(form.pre_registration, form.paid_total) === "PRE_REGISTERED"
-            ? "En cours"
+            ? "Pré-inscrit"
             : "Lead"}
         </span>
       </div>

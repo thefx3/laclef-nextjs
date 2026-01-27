@@ -24,6 +24,12 @@ const cardBase = "rounded-xl border border-slate-200/80 bg-white/90 p-4 shadow-s
 const labelBase = "text-xs font-semibold text-slate-600";
 const fieldBase =
   "mt-1 w-full rounded-md border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900";
+const buttonPrimary =
+  "rounded-md bg-slate-900 px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-slate-800";
+const buttonSecondary =
+  "rounded-md border border-slate-200 px-3 py-1.5 text-xs font-semibold text-slate-700 hover:border-slate-300 hover:text-slate-900";
+const buttonDanger =
+  "rounded-md border border-rose-200 px-2.5 py-1 text-xs font-semibold text-rose-700 transition hover:border-rose-300 hover:text-rose-800";
 
 const DAY_LABELS: Record<number, string> = {
   1: "Lun",
@@ -108,6 +114,7 @@ export default function OrganisationReferenceClient({
       {error ? <p className="text-sm text-rose-600">{error}</p> : null}
 
       <div className="grid gap-6 md:grid-cols-2">
+        {/* TEACHERS */}
       <div className={`${cardBase} order-1`}>
         <SectionHeader
           title="Professeurs"
@@ -174,7 +181,7 @@ export default function OrganisationReferenceClient({
                           }}
                         />
                         <button
-                          className="btn-action btn-action--delete"
+                          className={buttonDanger}
                           onClick={async () => {
                             try {
                               setErrorSafe(null);
@@ -197,6 +204,7 @@ export default function OrganisationReferenceClient({
         )}
       </div>
 
+      {/* LEVELS */}
       <div className={`${cardBase} order-3`}>
         <SectionHeader
           title="Niveaux"
@@ -265,7 +273,7 @@ export default function OrganisationReferenceClient({
                           }}
                         />
                         <button
-                          className="btn-action btn-action--delete"
+                          className={buttonDanger}
                           onClick={async () => {
                             try {
                               setErrorSafe(null);
@@ -288,7 +296,8 @@ export default function OrganisationReferenceClient({
         )}
       </div>
 
-      <div className={`${cardBase} order-4`}>
+      {/* TIMESLOTS */}
+      <div className={`${cardBase} order-2`}>
         <SectionHeader
           title="Horaires"
           action={
@@ -356,7 +365,7 @@ export default function OrganisationReferenceClient({
                           }}
                         />
                         <button
-                          className="btn-action btn-action--delete"
+                          className={buttonDanger}
                           onClick={async () => {
                             try {
                               setErrorSafe(null);
@@ -379,7 +388,8 @@ export default function OrganisationReferenceClient({
         )}
       </div>
 
-      <div className={`${cardBase} order-2`}>
+      {/* CLASSES */}
+      <div className={`${cardBase} order-4`}>
         <SectionHeader
           title="Classes (offres)"
           action={
@@ -420,7 +430,6 @@ export default function OrganisationReferenceClient({
                 <th className="py-2">Code</th>
                 <th className="py-2">Saison</th>
                 <th className="py-2">Sem</th>
-                <th className="py-2">Jour</th>
                 <th className="py-2">Niveau</th>
                 <th className="py-2">Prof</th>
                 <th className="py-2">Horaire</th>
@@ -434,9 +443,6 @@ export default function OrganisationReferenceClient({
                   <td className="py-2 font-semibold text-slate-700">{offering.code ?? "—"}</td>
                   <td className="py-2">{seasonById.get(offering.season_id)?.code ?? "—"}</td>
                   <td className="py-2">{offering.semester}</td>
-                  <td className="py-2">
-                    {offering.day_of_week ? DAY_LABELS[offering.day_of_week] ?? "—" : "—"}
-                  </td>
                   <td className="py-2">
                     {offering.level_id ? levelById.get(offering.level_id)?.code ?? "—" : "—"}
                   </td>
@@ -479,7 +485,7 @@ export default function OrganisationReferenceClient({
                           }}
                         />
                         <button
-                          className="btn-action btn-action--delete"
+                          className={buttonDanger}
                           onClick={async () => {
                             try {
                               setErrorSafe(null);
@@ -503,6 +509,7 @@ export default function OrganisationReferenceClient({
           </table>
         )}
       </div>
+
       </div>
     </div>
   );
@@ -519,6 +526,7 @@ function TeacherModal({
   ) => Promise<void>;
 }) {
   const [open, setOpen] = useState(false);
+  const actionClass = teacher ? buttonSecondary : buttonPrimary;
   const [form, setForm] = useState({
     code: teacher?.code ?? "",
     full_name: teacher?.full_name ?? "",
@@ -532,7 +540,7 @@ function TeacherModal({
   return (
     <>
       <button
-        className="btn-action btn-action--edit"
+        className={actionClass}
         onClick={() => {
           setForm({
             code: teacher?.code ?? "",
@@ -617,6 +625,7 @@ function LevelModal({
   ) => Promise<void>;
 }) {
   const [open, setOpen] = useState(false);
+  const actionClass = level ? buttonSecondary : buttonPrimary;
   const [form, setForm] = useState({
     code: level?.code ?? "",
     label: level?.label ?? "",
@@ -630,7 +639,7 @@ function LevelModal({
   return (
     <>
       <button
-        className="btn-action btn-action--edit"
+        className={actionClass}
         onClick={() => {
           setForm({
             code: level?.code ?? "",
@@ -714,6 +723,7 @@ function TimeSlotModal({
   ) => Promise<void>;
 }) {
   const [open, setOpen] = useState(false);
+  const actionClass = slot ? buttonSecondary : buttonPrimary;
   const [form, setForm] = useState({
     label: slot?.label ?? "",
     start_time: slot?.start_time ?? "",
@@ -727,7 +737,7 @@ function TimeSlotModal({
   return (
     <>
       <button
-        className="btn-action btn-action--edit"
+        className={actionClass}
         onClick={() => {
           setForm({
             label: slot?.label ?? "",
@@ -830,6 +840,7 @@ function ClassOfferingModal({
   ) => Promise<void>;
 }) {
   const [open, setOpen] = useState(false);
+  const actionClass = offering ? buttonSecondary : buttonPrimary;
   const defaultSeasonId =
     seasons.find((season) => season.is_current)?.id ?? seasons[0]?.id ?? "";
   const [form, setForm] = useState({
@@ -867,7 +878,7 @@ function ClassOfferingModal({
   return (
     <>
       <button
-        className="btn-action btn-action--edit"
+        className={actionClass}
         onClick={() => {
           setForm({
             season_id: offering?.season_id ?? defaultSeasonId,

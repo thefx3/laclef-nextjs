@@ -553,7 +553,7 @@ export default function StudentsClient({
   }, [deleteCandidate, editingStudent]);
 
   const emptyColSpan = useMemo(() => {
-    if (tab === "ENROLLED") return 17;
+    if (tab === "ENROLLED") return 16;
     if (tab === "PRE_REGISTERED" || tab === "LEFT") return 16;
     return 13;
   }, [tab]);
