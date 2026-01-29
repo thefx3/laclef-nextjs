@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-export default function ActivitesLayout({ children }: { children: ReactNode }) {
+export default function ComptabiliteLayout({ children }: { children: ReactNode }) {
   return (
     <div className="w-full">
         {children}
