@@ -92,7 +92,7 @@ async function createSeason(formData: FormData, redirectTo: string) {
 
   if (error) throw new Error(error.message);
 
-  revalidateTag("seasons");
+  revalidateTag("seasons", "default");
   redirect(redirectTo);
 }
 
@@ -121,7 +121,7 @@ async function updateSeason(formData: FormData, redirectTo: string) {
 
   if (error) throw new Error(error.message);
 
-  revalidateTag("seasons");
+  revalidateTag("seasons", "default");
   redirect(redirectTo);
 }
 
@@ -133,6 +133,6 @@ async function deleteSeason(formData: FormData, redirectTo: string) {
   const { error } = await supabaseAdmin.from("seasons").delete().eq("id", id);
   if (error) throw new Error(error.message);
 
-  revalidateTag("seasons");
+  revalidateTag("seasons", "default");
   redirect(redirectTo);
 }
